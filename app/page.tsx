@@ -14,7 +14,7 @@ export default function Home() {
     gradient.initGradient("#gradient-canvas");
   }, []);
 
-  const handleUpload = async (event) => {
+  const handleUpload = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     const fileInput = event.target.elements.file;
 
@@ -30,7 +30,7 @@ export default function Home() {
     Papa.parse(fileInput.files[0], {
       header: true,
       skipEmptyLines: true,
-      complete: async (results) => {
+      complete: async (results: Papa.ParseResult<any>) => {
         try {
           const response = await fetch('/api/upload', {
             method: 'POST',
